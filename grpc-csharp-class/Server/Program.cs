@@ -3,6 +3,7 @@ using System.IO;
 using Greet;
 using Grpc.Core;
 using Sum;
+using PrimeNumbers;
 
 namespace ServerApp
 {
@@ -22,6 +23,7 @@ namespace ServerApp
                     {
                         GreetingService.BindService(new GreetingServiceImpl()),
                         SumService.BindService(new SumServiceImpl()),
+                        PrimeNumbersService.BindService(new PrimeNumbersServiceImpl())
                     },
 
                     Ports = {new ServerPort("localhost", port, ServerCredentials.Insecure)}

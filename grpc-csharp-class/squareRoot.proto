@@ -1,0 +1,19 @@
+syntax = "proto3";
+
+package sqrt;
+
+message Number {
+	int32 a = 1;
+}
+
+message SqrtRequest {
+	Number number = 1;
+}
+
+message SqrtResponse {
+	double result = 1;
+}
+
+service SqrtService {
+	rpc SquareRoot(SqrtRequest) returns (SqrtResponse) {}
+}

@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Linq;
 using Average;
 using Max;
+using Sqrt;
 
 namespace Client
 {
@@ -39,7 +40,10 @@ namespace Client
 
             // Bi stream examples
             // await GreetEveryoneBi(channel);
-            await FindMaxBi(channel);
+            // await FindMaxBi(channel);
+
+            // Exception codes example
+            Sqrt(channel);
 
             channel.ShutdownAsync().Wait();
             Console.ReadKey();
@@ -244,6 +248,34 @@ namespace Client
 
 
             await responseReaderTask;
+        }
+
+        private static void Sqrt(Channel channel)
+        {
+            Console.WriteLine("Sqrt service");
+            var sqrtClient = new SqrtService.SqrtServiceClient(channel);
+
+            var number = new Sqrt.Number
+            {
+                A = -1
+            };
+
+            try
+            {
+                var sqrtRequest = new SqrtRequest()
+                {
+                    Number = number
+                };
+
+                var sqrtResponse = sqrtClient.SquareRoot(sqrtRequest);
+
+                Console.WriteLine(sqrtResponse.Result);
+                Console.WriteLine("");
+            }
+            catch (RpcException e)
+            {
+                Console.WriteLine("Error : " + e.Status.Detail);
+            }
         }
     }
 }

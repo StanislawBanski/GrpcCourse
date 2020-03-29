@@ -6,6 +6,7 @@ using Sum;
 using PrimeNumbers;
 using Average;
 using Max;
+using Sqrt;
 
 namespace ServerApp
 {
@@ -27,7 +28,8 @@ namespace ServerApp
                         SumService.BindService(new SumServiceImpl()),
                         PrimeNumbersService.BindService(new PrimeNumbersServiceImpl()),
                         AverageService.BindService(new AverageServiceImpl()),
-                        MaxService.BindService(new MaxServiceImpl())
+                        MaxService.BindService(new MaxServiceImpl()),
+                        SqrtService.BindService(new SquareRootServiceImpl())
                     },
 
                     Ports = {new ServerPort("localhost", port, ServerCredentials.Insecure)}

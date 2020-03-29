@@ -6,6 +6,7 @@ using System;
 using System.Threading.Tasks;
 using System.Linq;
 using Average;
+using Max;
 
 namespace Client
 {
@@ -24,6 +25,28 @@ namespace Client
                 }
             }));
 
+            // Unary examples
+            // GreetUnary(channel);
+            // Sum(channel);
+
+            // Server stream examples
+            // await GreetServerStream(channel);
+            // await PrimeNumbersStream(channel);
+
+            // Client stream examples
+            // await LongGreetClientStream(channel);
+            // await Average(channel);
+
+            // Bi stream examples
+            // await GreetEveryoneBi(channel);
+            await FindMaxBi(channel);
+
+            channel.ShutdownAsync().Wait();
+            Console.ReadKey();
+        }
+
+        private static void GreetUnary(Channel channel)
+        {
             Console.WriteLine("Greet unary");
             var client = new GreetingService.GreetingServiceClient(channel);
 
@@ -42,9 +65,10 @@ namespace Client
 
             Console.WriteLine(response.Result);
             Console.WriteLine("");
+        }
 
-
-
+        private static void Sum(Channel channel)
+        {
             Console.WriteLine("Sum service");
             var sumClient = new SumService.SumServiceClient(channel);
 
@@ -63,10 +87,18 @@ namespace Client
 
             Console.WriteLine(sumResponse.Result);
             Console.WriteLine("");
+        }
 
-
-
+        private static async Task GreetServerStream(Channel channel)
+        {
             Console.WriteLine("Greet stream");
+            var client = new GreetingService.GreetingServiceClient(channel);
+
+            var greeting = new Greeting()
+            {
+                FirstName = "Stanislaw",
+                LastName = "Banski"
+            };
 
             var requestForStream = new GreetManyTimesRequest() { Greeting = greeting };
 
@@ -79,14 +111,15 @@ namespace Client
                 await Task.Delay(200);
             }
             Console.WriteLine("");
+        }
 
-
-
+        private static async Task PrimeNumbersStream(Channel channel)
+        {
             Console.WriteLine("Prime numbers stream");
 
             var primeClient = new PrimeNumbersService.PrimeNumbersServiceClient(channel);
 
-            var primeRequest = new PrimeRequest() { Number = new Number { A = 120 } };
+            var primeRequest = new PrimeRequest() { Number = new PrimeNumbers.Number { A = 120 } };
 
             var responsePrimeStream = primeClient.ListPrimeNumbers(primeRequest);
 
@@ -96,10 +129,18 @@ namespace Client
                 await Task.Delay(200);
             }
             Console.WriteLine("");
+        }
 
-
-
+        private static async Task LongGreetClientStream(Channel channel)
+        {
             Console.WriteLine("Long greet client stream");
+            var client = new GreetingService.GreetingServiceClient(channel);
+
+            var greeting = new Greeting()
+            {
+                FirstName = "Stanislaw",
+                LastName = "Banski"
+            };
 
             var longRequest = new LongGreetRequest() { Greeting = greeting };
             var stream = client.LongGreet();
@@ -113,7 +154,10 @@ namespace Client
 
             var longResponse = await stream.ResponseAsync;
             Console.WriteLine(longResponse.Result);
+        }
 
+        private static async Task Average(Channel channel)
+        {
             Console.WriteLine("Average client stream");
 
             var averageClient = new AverageService.AverageServiceClient(channel);
@@ -122,16 +166,84 @@ namespace Client
 
             foreach (int i in Enumerable.Range(1, 10))
             {
-                await averageStream.RequestStream.WriteAsync(new AverageRequest() { Number = new AverageNumber() { A = i } } );
+                await averageStream.RequestStream.WriteAsync(new AverageRequest() { Number = new AverageNumber() { A = i } });
             }
 
             await averageStream.RequestStream.CompleteAsync();
 
             var averageResponse = await averageStream.ResponseAsync;
             Console.WriteLine(averageResponse.Result);
+        }
 
-            channel.ShutdownAsync().Wait();
-            Console.ReadKey();
+        private static async Task GreetEveryoneBi(Channel channel)
+        {
+            Console.WriteLine("Greet everyone bi");
+            var client = new GreetingService.GreetingServiceClient(channel);
+
+            var stream = client.GreetEveryone();
+
+            var responseReaderTask = Task.Run(async () =>
+            {
+                while (await stream.ResponseStream.MoveNext())
+                {
+                    Console.WriteLine("Received: " + stream.ResponseStream.Current.Result);
+                }
+            });
+
+            Greeting[] greetings =
+            {
+                new Greeting() { FirstName = "Stanislaw", LastName = "Banski" },
+                new Greeting() { FirstName = "John", LastName = "Doe" },
+                new Greeting() { FirstName = "Adam", LastName = "Smith" }
+            };
+
+            foreach (var item in greetings)
+            {
+                Console.WriteLine("Sending : " + item.ToString());
+                await stream.RequestStream.WriteAsync(new GreetEveryoneRequest() { Greeting = item });
+            }
+
+            await stream.RequestStream.CompleteAsync();
+
+
+            await responseReaderTask;
+        }
+
+        private static async Task FindMaxBi(Channel channel)
+        {
+            Console.WriteLine("Greet everyone bi");
+            var client = new MaxService.MaxServiceClient(channel);
+
+            var stream = client.Max();
+
+            var responseReaderTask = Task.Run(async () =>
+            {
+                while (await stream.ResponseStream.MoveNext())
+                {
+                    Console.WriteLine("Received: " + stream.ResponseStream.Current.Result);
+                }
+            });
+
+            int[] numbers =
+            {
+                1,
+                5,
+                3,
+                6,
+                2,
+                20
+            };
+
+            foreach (var item in numbers)
+            {
+                Console.WriteLine("Sending : " + item.ToString());
+                await stream.RequestStream.WriteAsync(new MaxRequest() { Number = new Max.Number() { A = item } });
+            }
+
+            await stream.RequestStream.CompleteAsync();
+
+
+            await responseReaderTask;
         }
     }
 }

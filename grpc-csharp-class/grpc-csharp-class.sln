@@ -8,6 +8,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "proto", "proto", "{070BCA53
 		average.proto = average.proto
 		dummy.proto = dummy.proto
 		greeting.proto = greeting.proto
+		max.proto = max.proto
 		PrimeNumber.proto = PrimeNumber.proto
 		sum.proto = sum.proto
 	EndProjectSection

@@ -5,6 +5,7 @@ using Grpc.Core;
 using Sum;
 using PrimeNumbers;
 using Average;
+using Max;
 
 namespace ServerApp
 {
@@ -25,7 +26,8 @@ namespace ServerApp
                         GreetingService.BindService(new GreetingServiceImpl()),
                         SumService.BindService(new SumServiceImpl()),
                         PrimeNumbersService.BindService(new PrimeNumbersServiceImpl()),
-                        AverageService.BindService(new AverageServiceImpl())
+                        AverageService.BindService(new AverageServiceImpl()),
+                        MaxService.BindService(new MaxServiceImpl())
                     },
 
                     Ports = {new ServerPort("localhost", port, ServerCredentials.Insecure)}

@@ -23,6 +23,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ssl", "ssl", "{28366AF7-8B5
 		ssl.sh = ssl.sh
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "evans", "evans", "{0EB123AD-A509-44B0-84F7-DD30F774B55F}"
+	ProjectSection(SolutionItems) = preProject
+		evans.exe = evans.exe
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

@@ -8,6 +8,8 @@ using Average;
 using Max;
 using Sqrt;
 using System.Collections.Generic;
+using Grpc.Reflection;
+using Grpc.Reflection.V1Alpha;
 
 namespace ServerApp
 {
@@ -37,7 +39,8 @@ namespace ServerApp
                         PrimeNumbersService.BindService(new PrimeNumbersServiceImpl()),
                         AverageService.BindService(new AverageServiceImpl()),
                         MaxService.BindService(new MaxServiceImpl()),
-                        SqrtService.BindService(new SquareRootServiceImpl())
+                        SqrtService.BindService(new SquareRootServiceImpl()),
+                        ServerReflection.BindService(new ReflectionServiceImpl(GreetingService.Descriptor, ServerReflection.Descriptor))
                     },
 
                     Ports = {new ServerPort("localhost", port, credentials)}

@@ -7,6 +7,7 @@ using PrimeNumbers;
 using Average;
 using Max;
 using Sqrt;
+using System.Collections.Generic;
 
 namespace ServerApp
 {
@@ -20,6 +21,13 @@ namespace ServerApp
 
             try
             {
+                var serverCert = File.ReadAllText("ssl/server.crt");
+                var serverKey = File.ReadAllText("ssl/server.key");
+                var keypair = new KeyCertificatePair(serverCert, serverKey);
+                var caCrt = File.ReadAllText("ssl/ca.crt");
+
+                var credentials = new SslServerCredentials(new List<KeyCertificatePair>() { keypair }, caCrt, true);
+
                 server = new Server()
                 {
                     Services =
@@ -32,7 +40,7 @@ namespace ServerApp
                         SqrtService.BindService(new SquareRootServiceImpl())
                     },
 
-                    Ports = {new ServerPort("localhost", port, ServerCredentials.Insecure)}
+                    Ports = {new ServerPort("localhost", port, credentials)}
                 };
 
                 server.Start();

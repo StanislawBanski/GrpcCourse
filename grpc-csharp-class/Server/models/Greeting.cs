@@ -34,14 +34,18 @@ namespace Greet {
             "ZWV0aW5nIiMKEUxvbmdHcmVldFJlc3BvbnNlEg4KBnJlc3VsdBgBIAEoCSI5",
             "ChRHcmVldEV2ZXJ5b25lUmVxdWVzdBIhCghncmVldGluZxgBIAEoCzIPLmdy",
             "ZWV0LkdyZWV0aW5nIicKFUdyZWV0RXZlcnlvbmVSZXNwb25zZRIOCgZyZXN1",
-            "bHQYASABKAkytgIKD0dyZWV0aW5nU2VydmljZRI6CgVHcmVldBIWLmdyZWV0",
-            "LkdyZWV0aW5nUmVxdWVzdBoXLmdyZWV0LkdyZWV0aW5nUmVzcG9uc2UiABJR",
-            "Cg5HcmVldE1hbnlUaW1lcxIcLmdyZWV0LkdyZWV0TWFueVRpbWVzUmVxdWVz",
-            "dBodLmdyZWV0LkdyZWV0TWFueVRpbWVzUmVzcG9uc2UiADABEkIKCUxvbmdH",
-            "cmVldBIXLmdyZWV0LkxvbmdHcmVldFJlcXVlc3QaGC5ncmVldC5Mb25nR3Jl",
-            "ZXRSZXNwb25zZSIAKAESUAoNR3JlZXRFdmVyeW9uZRIbLmdyZWV0LkdyZWV0",
-            "RXZlcnlvbmVSZXF1ZXN0GhwuZ3JlZXQuR3JlZXRFdmVyeW9uZVJlc3BvbnNl",
-            "IgAoATABYgZwcm90bzM="));
+            "bHQYASABKAkiPQoYR3JlZXRXaXRoRGVhZGxpbmVSZXF1ZXN0EiEKCGdyZWV0",
+            "aW5nGAEgASgLMg8uZ3JlZXQuR3JlZXRpbmciKwoZR3JlZXRXaXRoRGVhZGxp",
+            "bmVSZXNwb25zZRIOCgZyZXN1bHQYASABKAkykAMKD0dyZWV0aW5nU2Vydmlj",
+            "ZRI6CgVHcmVldBIWLmdyZWV0LkdyZWV0aW5nUmVxdWVzdBoXLmdyZWV0Lkdy",
+            "ZWV0aW5nUmVzcG9uc2UiABJRCg5HcmVldE1hbnlUaW1lcxIcLmdyZWV0Lkdy",
+            "ZWV0TWFueVRpbWVzUmVxdWVzdBodLmdyZWV0LkdyZWV0TWFueVRpbWVzUmVz",
+            "cG9uc2UiADABEkIKCUxvbmdHcmVldBIXLmdyZWV0LkxvbmdHcmVldFJlcXVl",
+            "c3QaGC5ncmVldC5Mb25nR3JlZXRSZXNwb25zZSIAKAESUAoNR3JlZXRFdmVy",
+            "eW9uZRIbLmdyZWV0LkdyZWV0RXZlcnlvbmVSZXF1ZXN0GhwuZ3JlZXQuR3Jl",
+            "ZXRFdmVyeW9uZVJlc3BvbnNlIgAoATABElgKEUdyZWV0V2l0aERlYWRsaW5l",
+            "Eh8uZ3JlZXQuR3JlZXRXaXRoRGVhZGxpbmVSZXF1ZXN0GiAuZ3JlZXQuR3Jl",
+            "ZXRXaXRoRGVhZGxpbmVSZXNwb25zZSIAYgZwcm90bzM="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
@@ -53,7 +57,9 @@ namespace Greet {
             new pbr::GeneratedClrTypeInfo(typeof(global::Greet.LongGreetRequest), global::Greet.LongGreetRequest.Parser, new[]{ "Greeting" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Greet.LongGreetResponse), global::Greet.LongGreetResponse.Parser, new[]{ "Result" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Greet.GreetEveryoneRequest), global::Greet.GreetEveryoneRequest.Parser, new[]{ "Greeting" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Greet.GreetEveryoneResponse), global::Greet.GreetEveryoneResponse.Parser, new[]{ "Result" }, null, null, null, null)
+            new pbr::GeneratedClrTypeInfo(typeof(global::Greet.GreetEveryoneResponse), global::Greet.GreetEveryoneResponse.Parser, new[]{ "Result" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Greet.GreetWithDeadlineRequest), global::Greet.GreetWithDeadlineRequest.Parser, new[]{ "Greeting" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Greet.GreetWithDeadlineResponse), global::Greet.GreetWithDeadlineResponse.Parser, new[]{ "Result" }, null, null, null, null)
           }));
     }
     #endregion
@@ -1246,6 +1252,270 @@ namespace Greet {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public void MergeFrom(GreetEveryoneResponse other) {
+      if (other == null) {
+        return;
+      }
+      if (other.Result.Length != 0) {
+        Result = other.Result;
+      }
+      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            break;
+          case 10: {
+            Result = input.ReadString();
+            break;
+          }
+        }
+      }
+    }
+
+  }
+
+  public sealed partial class GreetWithDeadlineRequest : pb::IMessage<GreetWithDeadlineRequest> {
+    private static readonly pb::MessageParser<GreetWithDeadlineRequest> _parser = new pb::MessageParser<GreetWithDeadlineRequest>(() => new GreetWithDeadlineRequest());
+    private pb::UnknownFieldSet _unknownFields;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<GreetWithDeadlineRequest> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::Greet.GreetingReflection.Descriptor.MessageTypes[9]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public GreetWithDeadlineRequest() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public GreetWithDeadlineRequest(GreetWithDeadlineRequest other) : this() {
+      greeting_ = other.greeting_ != null ? other.greeting_.Clone() : null;
+      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public GreetWithDeadlineRequest Clone() {
+      return new GreetWithDeadlineRequest(this);
+    }
+
+    /// <summary>Field number for the "greeting" field.</summary>
+    public const int GreetingFieldNumber = 1;
+    private global::Greet.Greeting greeting_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public global::Greet.Greeting Greeting {
+      get { return greeting_; }
+      set {
+        greeting_ = value;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as GreetWithDeadlineRequest);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(GreetWithDeadlineRequest other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (!object.Equals(Greeting, other.Greeting)) return false;
+      return Equals(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (greeting_ != null) hash ^= Greeting.GetHashCode();
+      if (_unknownFields != null) {
+        hash ^= _unknownFields.GetHashCode();
+      }
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+      if (greeting_ != null) {
+        output.WriteRawTag(10);
+        output.WriteMessage(Greeting);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(output);
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      if (greeting_ != null) {
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(Greeting);
+      }
+      if (_unknownFields != null) {
+        size += _unknownFields.CalculateSize();
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(GreetWithDeadlineRequest other) {
+      if (other == null) {
+        return;
+      }
+      if (other.greeting_ != null) {
+        if (greeting_ == null) {
+          Greeting = new global::Greet.Greeting();
+        }
+        Greeting.MergeFrom(other.Greeting);
+      }
+      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            break;
+          case 10: {
+            if (greeting_ == null) {
+              Greeting = new global::Greet.Greeting();
+            }
+            input.ReadMessage(Greeting);
+            break;
+          }
+        }
+      }
+    }
+
+  }
+
+  public sealed partial class GreetWithDeadlineResponse : pb::IMessage<GreetWithDeadlineResponse> {
+    private static readonly pb::MessageParser<GreetWithDeadlineResponse> _parser = new pb::MessageParser<GreetWithDeadlineResponse>(() => new GreetWithDeadlineResponse());
+    private pb::UnknownFieldSet _unknownFields;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<GreetWithDeadlineResponse> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::Greet.GreetingReflection.Descriptor.MessageTypes[10]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public GreetWithDeadlineResponse() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public GreetWithDeadlineResponse(GreetWithDeadlineResponse other) : this() {
+      result_ = other.result_;
+      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public GreetWithDeadlineResponse Clone() {
+      return new GreetWithDeadlineResponse(this);
+    }
+
+    /// <summary>Field number for the "result" field.</summary>
+    public const int ResultFieldNumber = 1;
+    private string result_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public string Result {
+      get { return result_; }
+      set {
+        result_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as GreetWithDeadlineResponse);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(GreetWithDeadlineResponse other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (Result != other.Result) return false;
+      return Equals(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (Result.Length != 0) hash ^= Result.GetHashCode();
+      if (_unknownFields != null) {
+        hash ^= _unknownFields.GetHashCode();
+      }
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+      if (Result.Length != 0) {
+        output.WriteRawTag(10);
+        output.WriteString(Result);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(output);
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      if (Result.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(Result);
+      }
+      if (_unknownFields != null) {
+        size += _unknownFields.CalculateSize();
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(GreetWithDeadlineResponse other) {
       if (other == null) {
         return;
       }

@@ -53,5 +53,12 @@ namespace ServerApp
                 await responseStream.WriteAsync(new GreetEveryoneResponse() { Result = result });
             }
         }
+
+        public override async Task<GreetWithDeadlineResponse> GreetWithDeadline(GreetWithDeadlineRequest request, ServerCallContext context)
+        {
+            await Task.Delay(300);
+
+            return new GreetWithDeadlineResponse() { Result = $"Hello {request.Greeting.FirstName} {request.Greeting.LastName}" };
+        }
     }
 }

@@ -43,7 +43,10 @@ namespace Client
             // await FindMaxBi(channel);
 
             // Exception codes example
-            Sqrt(channel);
+            // Sqrt(channel);
+
+            // Deadline example
+            // GreetWithDelay(channel);
 
             channel.ShutdownAsync().Wait();
             Console.ReadKey();
@@ -273,6 +276,35 @@ namespace Client
                 Console.WriteLine("");
             }
             catch (RpcException e)
+            {
+                Console.WriteLine("Error : " + e.Status.Detail);
+            }
+        }
+
+        private static void GreetWithDelay(Channel channel)
+        {
+            Console.WriteLine("Greet unary with delay");
+            var client = new GreetingService.GreetingServiceClient(channel);
+
+            var greeting = new Greeting()
+            {
+                FirstName = "Stanislaw",
+                LastName = "Banski"
+            };
+
+            try
+            {
+                var request = new GreetWithDeadlineRequest()
+                {
+                    Greeting = greeting
+                };
+
+                var response = client.GreetWithDeadline(request, deadline: DateTime.UtcNow.AddMilliseconds(100));
+
+                Console.WriteLine(response.Result);
+                Console.WriteLine("");
+            }
+            catch (RpcException e) when (e.StatusCode == StatusCode.DeadlineExceeded)
             {
                 Console.WriteLine("Error : " + e.Status.Detail);
             }

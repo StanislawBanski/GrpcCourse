@@ -4,6 +4,7 @@ using Greet;
 using Grpc.Core;
 using Sum;
 using PrimeNumbers;
+using Average;
 
 namespace ServerApp
 {
@@ -23,7 +24,8 @@ namespace ServerApp
                     {
                         GreetingService.BindService(new GreetingServiceImpl()),
                         SumService.BindService(new SumServiceImpl()),
-                        PrimeNumbersService.BindService(new PrimeNumbersServiceImpl())
+                        PrimeNumbersService.BindService(new PrimeNumbersServiceImpl()),
+                        AverageService.BindService(new AverageServiceImpl())
                     },
 
                     Ports = {new ServerPort("localhost", port, ServerCredentials.Insecure)}

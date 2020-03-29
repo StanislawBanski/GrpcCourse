@@ -5,6 +5,7 @@ using PrimeNumbers;
 using System;
 using System.Threading.Tasks;
 using System.Linq;
+using Average;
 
 namespace Client
 {
@@ -26,7 +27,8 @@ namespace Client
             Console.WriteLine("Greet unary");
             var client = new GreetingService.GreetingServiceClient(channel);
 
-            var greeting = new Greeting() { 
+            var greeting = new Greeting()
+            {
                 FirstName = "Stanislaw",
                 LastName = "Banski"
             };
@@ -111,6 +113,22 @@ namespace Client
 
             var longResponse = await stream.ResponseAsync;
             Console.WriteLine(longResponse.Result);
+
+            Console.WriteLine("Average client stream");
+
+            var averageClient = new AverageService.AverageServiceClient(channel);
+
+            var averageStream = averageClient.Average();
+
+            foreach (int i in Enumerable.Range(1, 10))
+            {
+                await averageStream.RequestStream.WriteAsync(new AverageRequest() { Number = new AverageNumber() { A = i } } );
+            }
+
+            await averageStream.RequestStream.CompleteAsync();
+
+            var averageResponse = await averageStream.ResponseAsync;
+            Console.WriteLine(averageResponse.Result);
 
             channel.ShutdownAsync().Wait();
             Console.ReadKey();
